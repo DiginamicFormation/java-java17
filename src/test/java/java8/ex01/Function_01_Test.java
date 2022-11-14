@@ -3,7 +3,6 @@ package java8.ex01;
 import java8.data.Account;
 import java8.data.Person;
 import org.junit.Test;
-
 import java.util.function.Function;
 
 /**
@@ -41,7 +40,15 @@ public class Function_01_Test {
     // TODO Compléter la définition de cette fonction
     // TODO la propriété owner est valorisé avec la personne en paramètre
     // TODO la propriété balance est valorisé à 1000
-    private Function<Person, Account> personToAccount = (Person, balance) -> new Account(Person, balance);
+    private Function<Person, Account> personToAccount = (person) -> {
+    	
+    	int	balance = 1000;
+    	Account account = new Account();
+    	account.setOwner(person);
+    	account.setBalance(balance);
+    	
+    	return account;
+    };
     // end::personToAccount[]
 
     @Test
@@ -50,7 +57,7 @@ public class Function_01_Test {
         Person person = new Person("Jules", "France", 10, "pass");
 
         // TODO invoquer la fonction personToAccount
-        Account result = personToAccount.apply(person, 1000);
+        Account result = personToAccount.apply(person);
 
         assert result.getOwner().equals(person);
         assert result.getBalance().equals(1000);
